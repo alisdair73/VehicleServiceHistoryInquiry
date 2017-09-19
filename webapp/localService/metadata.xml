@@ -1,0 +1,217 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='DEC_TRUSTED')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZWTY_SERVICE_HISTORY_INQUIRY_SRV" xml:lang="en" sap:schema-version="1">
+            <EntityType Name="I_LanguageType" sap:label="Language" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="Language_Text" sap:label="Language Key"/>
+                <Property Name="Language_Text" Type="Edm.String" MaxLength="16" sap:label="Name" sap:quickinfo="Name of Language" sap:creatable="false" sap:updatable="false"/>
+                <Property Name="LanguageISOCode" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Lang. (ISO 639)" sap:quickinfo="2-Character SAP Language Code"/>
+                <NavigationProperty Name="to_Text" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_DAB3483923698C609058A2E35497F42C" FromRole="FromRole_assoc_DAB3483923698C609058A2E35497F42C" ToRole="ToRole_assoc_DAB3483923698C609058A2E35497F42C"/>
+            </EntityType>
+            <EntityType Name="ZWTY_I_STATUSType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="status"/>
+                </Key>
+                <Property Name="status" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:text="status_Text" sap:label="Claim Status DP" sap:quickinfo="Warranty Claim Status (FE)"/>
+                <Property Name="status_Text" Type="Edm.String" MaxLength="40" sap:label="Claim Status" sap:quickinfo="Description Processing Status of a Warranty Claim" sap:creatable="false" sap:updatable="false"/>
+                <NavigationProperty Name="to_statusText" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_E2BE8D488896952DAF5BBDF7D9EE34E3" FromRole="FromRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3" ToRole="ToRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3"/>
+            </EntityType>
+            <EntityType Name="Zwty_I_Status_TextType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="status"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="status" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Claim Status DP" sap:quickinfo="Warranty Claim Status (FE)"/>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="to_Language/Language_Text" sap:label="Language Key" sap:value-list="standard"/>
+                <Property Name="statusText" Type="Edm.String" MaxLength="40" sap:label="Claim Status" sap:quickinfo="Description Processing Status of a Warranty Claim"/>
+                <NavigationProperty Name="to_Language" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_258E21D968313BBA3378C8E7122BEDC4" FromRole="FromRole_assoc_258E21D968313BBA3378C8E7122BEDC4" ToRole="ToRole_assoc_258E21D968313BBA3378C8E7122BEDC4"/>
+            </EntityType>
+            <EntityType Name="I_LanguageTextType" sap:label="Language Text" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Language"/>
+                    <PropertyRef Name="LanguageCode"/>
+                </Key>
+                <Property Name="Language" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="to_Language/Language_Text" sap:label="Language Key" sap:value-list="standard"/>
+                <Property Name="LanguageCode" Type="Edm.String" Nullable="false" MaxLength="2" sap:text="to_LanguageCode/Language_Text" sap:label="Language Key" sap:value-list="standard"/>
+                <Property Name="LanguageName" Type="Edm.String" MaxLength="16" sap:label="Name" sap:quickinfo="Name of Language"/>
+                <NavigationProperty Name="to_Language" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_FBAD09C202DB92261094F09949995622" FromRole="FromRole_assoc_FBAD09C202DB92261094F09949995622" ToRole="ToRole_assoc_FBAD09C202DB92261094F09949995622"/>
+                <NavigationProperty Name="to_LanguageCode" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_E3E085D6104487FE371705EE65EA4511" FromRole="FromRole_assoc_E3E085D6104487FE371705EE65EA4511" ToRole="ToRole_assoc_E3E085D6104487FE371705EE65EA4511"/>
+            </EntityType>
+            <EntityType Name="ZWTY_C_SERVICE_HISTORIESType" sap:label="Service Histories" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="pnguid"/>
+                    <PropertyRef Name="pncnt"/>
+                </Key>
+                <Property Name="pnguid" Type="Edm.Guid" Nullable="false" sap:label="Internal Number" sap:quickinfo="Internal Number of iPPE Node"/>
+                <Property Name="submittedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Submitted Date"/>
+                <Property Name="lastChangedDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Last Changed"/>
+                <Property Name="sixtyDayKPIWindow" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="rcti" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"/>
+                <Property Name="syntheticStatusCode" Type="Edm.Byte"/>
+                <Property Name="claimTypeBE" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Warranty Claim Type"/>
+                <Property Name="pncnt" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Counter" sap:quickinfo="Internal Counter"/>
+                <Property Name="vin" Type="Edm.String" MaxLength="40" sap:label="VIN" sap:quickinfo="External Object Number"/>
+                <Property Name="serviceNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Service Number" sap:quickinfo="Number of Warranty Claim"/>
+                <Property Name="status" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="to_claimStatus/status_Text" sap:label="Status" sap:quickinfo="Warranty Claim Status (FE)" sap:value-list="standard"/>
+                <Property Name="serviceHistoryStatusText" Type="Edm.String" MaxLength="40" sap:label="Status" sap:quickinfo="Description Processing Status of a Warranty Claim"/>
+                <Property Name="repairOrderNumber" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="RO Number" sap:quickinfo="Repair Order number"/>
+                <Property Name="serviceCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Service Code"/>
+                <Property Name="comments" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Comments"/>
+                <NavigationProperty Name="to_claimStatus" Relationship="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_EF664E1883A932B0CF9B73154C3C7B86" FromRole="FromRole_assoc_EF664E1883A932B0CF9B73154C3C7B86" ToRole="ToRole_assoc_EF664E1883A932B0CF9B73154C3C7B86"/>
+            </EntityType>
+            <Association Name="assoc_EF664E1883A932B0CF9B73154C3C7B86" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_C_SERVICE_HISTORIESType" Multiplicity="1" Role="FromRole_assoc_EF664E1883A932B0CF9B73154C3C7B86"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_I_STATUSType" Multiplicity="1" Role="ToRole_assoc_EF664E1883A932B0CF9B73154C3C7B86"/>
+            </Association>
+            <Association Name="assoc_258E21D968313BBA3378C8E7122BEDC4" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.Zwty_I_Status_TextType" Multiplicity="1" Role="FromRole_assoc_258E21D968313BBA3378C8E7122BEDC4"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageType" Multiplicity="0..1" Role="ToRole_assoc_258E21D968313BBA3378C8E7122BEDC4"/>
+            </Association>
+            <Association Name="assoc_DAB3483923698C609058A2E35497F42C" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageType" Multiplicity="1" Role="FromRole_assoc_DAB3483923698C609058A2E35497F42C"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType" Multiplicity="*" Role="ToRole_assoc_DAB3483923698C609058A2E35497F42C"/>
+            </Association>
+            <Association Name="assoc_E2BE8D488896952DAF5BBDF7D9EE34E3" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_I_STATUSType" Multiplicity="1" Role="FromRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.Zwty_I_Status_TextType" Multiplicity="*" Role="ToRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3"/>
+            </Association>
+            <Association Name="assoc_FBAD09C202DB92261094F09949995622" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType" Multiplicity="1" Role="FromRole_assoc_FBAD09C202DB92261094F09949995622"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageType" Multiplicity="0..1" Role="ToRole_assoc_FBAD09C202DB92261094F09949995622"/>
+            </Association>
+            <Association Name="assoc_E3E085D6104487FE371705EE65EA4511" sap:content-version="1">
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType" Multiplicity="1" Role="FromRole_assoc_E3E085D6104487FE371705EE65EA4511"/>
+                <End Type="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageType" Multiplicity="0..1" Role="ToRole_assoc_E3E085D6104487FE371705EE65EA4511"/>
+            </Association>
+            <EntityContainer Name="ZWTY_SERVICE_HISTORY_INQUIRY_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="I_Language" EntityType="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="ZWTY_I_STATUS" EntityType="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_I_STATUSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="Zwty_I_Status_Text" EntityType="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.Zwty_I_Status_TextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="I_LanguageText" EntityType="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZWTY_C_SERVICE_HISTORIES" EntityType="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_C_SERVICE_HISTORIESType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_258E21D968313BBA3378C8E7122BEDC4" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_258E21D968313BBA3378C8E7122BEDC4" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zwty_I_Status_Text" Role="FromRole_assoc_258E21D968313BBA3378C8E7122BEDC4"/>
+                    <End EntitySet="I_Language" Role="ToRole_assoc_258E21D968313BBA3378C8E7122BEDC4"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_EF664E1883A932B0CF9B73154C3C7B86" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_EF664E1883A932B0CF9B73154C3C7B86" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZWTY_C_SERVICE_HISTORIES" Role="FromRole_assoc_EF664E1883A932B0CF9B73154C3C7B86"/>
+                    <End EntitySet="ZWTY_I_STATUS" Role="ToRole_assoc_EF664E1883A932B0CF9B73154C3C7B86"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_E3E085D6104487FE371705EE65EA4511" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_E3E085D6104487FE371705EE65EA4511" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_LanguageText" Role="FromRole_assoc_E3E085D6104487FE371705EE65EA4511"/>
+                    <End EntitySet="I_Language" Role="ToRole_assoc_E3E085D6104487FE371705EE65EA4511"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_DAB3483923698C609058A2E35497F42C" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_DAB3483923698C609058A2E35497F42C" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_Language" Role="FromRole_assoc_DAB3483923698C609058A2E35497F42C"/>
+                    <End EntitySet="I_LanguageText" Role="ToRole_assoc_DAB3483923698C609058A2E35497F42C"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_FBAD09C202DB92261094F09949995622" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_FBAD09C202DB92261094F09949995622" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="I_LanguageText" Role="FromRole_assoc_FBAD09C202DB92261094F09949995622"/>
+                    <End EntitySet="I_Language" Role="ToRole_assoc_FBAD09C202DB92261094F09949995622"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_E2BE8D488896952DAF5BBDF7D9EE34E3" Association="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.assoc_E2BE8D488896952DAF5BBDF7D9EE34E3" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZWTY_I_STATUS" Role="FromRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3"/>
+                    <End EntitySet="Zwty_I_Status_Text" Role="ToRole_assoc_E2BE8D488896952DAF5BBDF7D9EE34E3"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.Zwty_I_Status_TextType/Language">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Language"/>
+                        <PropertyValue Property="CollectionPath" String="I_Language"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Language"/>
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType/Language">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Language"/>
+                        <PropertyValue Property="CollectionPath" String="I_Language"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Language"/>
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.I_LanguageTextType/LanguageCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String="Language"/>
+                        <PropertyValue Property="CollectionPath" String="I_Language"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="LanguageCode"/>
+                                    <PropertyValue Property="ValueListProperty" String="Language"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="Language_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_C_SERVICE_HISTORIESType/status">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" String=""/>
+                        <PropertyValue Property="CollectionPath" String="ZWTY_I_STATUS"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="status"/>
+                                    <PropertyValue Property="ValueListProperty" String="status"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="status_Text"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZWTY_SERVICE_HISTORY_INQUIRY_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZWTY_SERVICE_HISTORY_INQUIRY_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
