@@ -48,6 +48,6 @@
   },
   "deploy": {
     "destination": "DGW",
-    "name": "zwty_srvhst_inq"
+    "name": "ZWTY_SRVHST_INQ"
   }
 }

@@ -126,15 +126,7 @@
 				"component": {
 					"name": "sap.suite.ui.generic.template.ListReport",
 					"list": true
-				},
-				"pages": [
-					{
-						"entitySet": "ZWTY_C_SERVICE_HISTORIES",
-						"component": {
-							"name": "sap.suite.ui.generic.template.ObjectPage"
-						}
-					}
-				]
+				}
 			}
 		]
 	},
