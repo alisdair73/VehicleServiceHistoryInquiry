@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+    <Button
+        id="rcti"
+        icon="{= ${rcti} === 'D' ? 'sap-icon://complete':'sap-icon://pdf-attachment'}"
+        type="{= ${rcti} === 'D' ? 'Emphasized':'Default'}"
+        tooltip="{i18n>printRCTI}"
+        press="onShowRCTIDocuments"
+        visible="{= ${rcti} !== ''}"
+    />  
+</core:FragmentDefinition>

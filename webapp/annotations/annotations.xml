@@ -11,7 +11,7 @@
 			<!--===============================================================================
                 Entity Type from chosen collection 
                 ================================================================================-->
-			<Annotations Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_C_SERVICE_HISTORIESType">
+			<Annotations Target="ZWTY_SERVICE_HISTORY_INQUIRY_SRV.ZWTY_C_SERVICE_HISTORYType">
 				<Annotation Term="UI.Facets">
 					<Collection>
 						<Record Type="UI.CollectionFacet">

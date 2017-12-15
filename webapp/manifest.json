@@ -93,13 +93,13 @@
 				"type": "sap.ui.model.resource.ResourceModel",
 				"uri": "i18n/i18n.properties"
 			},
-			"i18n|sap.suite.ui.generic.template.ListReport|ZWTY_C_SERVICE_HISTORIES": {
+			"i18n|sap.suite.ui.generic.template.ListReport|ZWTY_C_SERVICE_HISTORY": {
 				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/ListReport/ZWTY_C_SERVICE_HISTORIES/i18n.properties"
+				"uri": "i18n/ListReport/ZWTY_C_SERVICE_HISTORY/i18n.properties"
 			},
-			"i18n|sap.suite.ui.generic.template.ObjectPage|ZWTY_C_SERVICE_HISTORIES": {
+			"i18n|sap.suite.ui.generic.template.ObjectPage|ZWTY_C_SERVICE_HISTORY": {
 				"type": "sap.ui.model.resource.ResourceModel",
-				"uri": "i18n/ObjectPage/ZWTY_C_SERVICE_HISTORIES/i18n.properties"
+				"uri": "i18n/ObjectPage/ZWTY_C_SERVICE_HISTORY/i18n.properties"
 			},
 			"": {
 				"dataSource": "mainService",
@@ -111,7 +111,27 @@
 			}
 		},
 		"extends": {
-			"extensions": {}
+			"extensions": {
+				"sap.ui.viewExtensions": {
+					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
+						"ResponsiveTableColumnsExtension|ZWTY_C_SERVICE_HISTORY": {
+							"className": "sap.ui.core.Fragment",
+							"fragmentName": "vehicle_service_history_inquiry.ext.fragment.CustomTableColumns",
+							"type": "XML"
+						},
+						"ResponsiveTableCellsExtension|ZWTY_C_SERVICE_HISTORY": {
+							"className": "sap.ui.core.Fragment",
+							"fragmentName": "vehicle_service_history_inquiry.ext.fragment.CustomTableCells",
+							"type": "XML"
+						}
+					}
+				},
+				"sap.ui.controllerExtensions": {
+					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
+						"controllerName": "vehicle_service_history_inquiry.ext.controller.ListReportExt"
+					}
+				}
+			}
 		},
 		"contentDensities": {
 			"compact": true,
@@ -122,7 +142,7 @@
 		"_version": "1.1.0",
 		"pages": [
 			{
-				"entitySet": "ZWTY_C_SERVICE_HISTORIES",
+				"entitySet": "ZWTY_C_SERVICE_HISTORY",
 				"component": {
 					"name": "sap.suite.ui.generic.template.ListReport",
 					"list": true
