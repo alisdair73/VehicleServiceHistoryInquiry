@@ -5,7 +5,7 @@ sap.ui.controller("vehicle_service_history_inquiry.ext.controller.ListReportExt"
 		var documentNumber = event.getParameter("item").getText();
 			
 		sap.m.URLHelper.redirect("/sap/opu/odata/sap/ZWTY_WARRANTY_CLAIMS_SRV/DocumentSet(DocumentNumber='" + 
-			documentNumber + "',DocumentType='RCTI')/$value", true);
+			documentNumber + "',DocumentType='ZSRA',LogResult=true)/$value", true);
 			
 		var downloadedAttachments = event.getSource().getItems().filter(function(attachment){
 			return attachment.getIcon() === "sap-icon://complete" && attachment.getText() !== documentNumber;
