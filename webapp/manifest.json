@@ -128,7 +128,20 @@
 				},
 				"sap.ui.controllerExtensions": {
 					"sap.suite.ui.generic.template.ListReport.view.ListReport": {
-						"controllerName": "vehicle_service_history_inquiry.ext.controller.ListReportExt"
+						"controllerName": "vehicle_service_history_inquiry.ext.controller.ListReportExt",
+						"sap.ui.generic.app": {
+							"ZWTY_C_SERVICE_HISTORY": {
+								"EntitySet": "ZWTY_C_SERVICE_HISTORY",
+								"Actions": {
+									"download": {
+										"id": "downloadToExcel",
+										"text": "",
+										"press": "onDownload",
+										"requiresSelection": false
+									}
+								}
+							}
+						}
 					}
 				}
 			}
